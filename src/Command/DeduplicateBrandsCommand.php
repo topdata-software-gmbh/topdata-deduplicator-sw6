@@ -12,6 +12,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Command\Command;
 use Topdata\TopdataFoundationSW6\Command\AbstractTopdataCommand;
 use Topdata\TopdataFoundationSW6\Helper\CliStyle;
 use Topdata\TopdataFoundationSW6\Util\CliLogger;
@@ -143,12 +144,14 @@ class DeduplicateBrandsCommand extends AbstractTopdataCommand
         $masterHexId = Uuid::fromBytesToHex($master['id']);
         $duplicates = array_slice($manufacturers, 1);
 
+        $masterCreatedAt = (new \DateTime($master['created_at']))->format('Y-m-d');
         CliLogger::write(sprintf('Group: <yellow>%s</yellow>', $master['name']), true);
-        CliLogger::write(sprintf('  ↳ KEEP (Master):  [ID: %s] with <info>%d</info> assigned products', $masterHexId, $master['product_count']), true);
+        CliLogger::write(sprintf('  ↳ KEEP (Master):  [ID: %s] created at %s with <info>%d</info> assigned products', $masterHexId, $masterCreatedAt, $master['product_count']), true);
 
         foreach ($duplicates as $duplicate) {
             $duplicateHexId = Uuid::fromBytesToHex($duplicate['id']);
-            CliLogger::write(sprintf('  ↳ MERGE (Delete): [ID: %s] (Current assigned products: %d)', $duplicateHexId, $duplicate['product_count']), true);
+            $duplicateCreatedAt = (new \DateTime($duplicate['created_at']))->format('Y-m-d');
+            CliLogger::write(sprintf('  ↳ MERGE (Delete): [ID: %s] created at %s (Current assigned products: %d)', $duplicateHexId, $duplicateCreatedAt, $duplicate['product_count']), true);
 
             if ($dryRun) {
                 continue;
