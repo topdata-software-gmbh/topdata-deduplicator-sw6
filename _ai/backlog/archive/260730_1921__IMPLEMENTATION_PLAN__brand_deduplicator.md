@@ -3,7 +3,8 @@ filename: "_ai/backlog/active/260730_1921__IMPLEMENTATION_PLAN__brand_deduplicat
 title: "Implementation Plan: Brand Deduplicator CLI Command"
 createdAt: 2026-07-30 19:21
 updatedAt: 2026-07-30 19:21
-status: draft
+status: completed
+completedAt: 2026-07-30 19:31
 priority: high
 tags: [shopware, catalog, deduplication, cli, brand, open-source]
 estimatedComplexity: moderate

@@ -15,5 +15,12 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+        <!-- Command Registration -->
+        <service id="Topdata\TopdataDeduplicatorSW6\Command\DeduplicateBrandsCommand" autowire="true">
+            <argument type="service" id="Doctrine\DBAL\Connection"/>
+            <argument type="service" id="product_manufacturer.repository"/>
+            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\Indexing\EntityIndexerRegistry"/>
+            <tag name="console.command"/>
+        </service>
     </services>
 </container>
