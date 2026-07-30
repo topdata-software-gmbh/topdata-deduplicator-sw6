@@ -27,6 +27,7 @@ bin/console topdata:deduplicator:brands
 
 - Shopware 6.7.*
 - PHP 8.2+
+- `topdata/topdata-foundation-sw6` (provides CLI base classes and logging)
 
 ## License
 
